@@ -1,0 +1,35 @@
+04/04/2022* // Fecha de la Consulta
+15:11* // Hora de la Consulta
+E68X* // Codigo de la consulta
+
+// Diagnostico
+Secuelas De Hiperalimentación* // Descripion
+Et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo* // Indicaciones
+
+Medico
+33-3392682* //Cedula
+Vite Pajaro* //Apellido
+Jorge Adolfo* // Nombre
+9792324073* // Codigo
+08:00* //Hora de entrada y salida
+16:00*
+
+Paciente
+4157545993-8* // Seguro
+Marcelo Cuellar* // Nombre
+Dora Evelia* // Apellido
+urette Andre* // Fecha???
+Refugio Barragán De T.* // Calle
+5186* // Numero
+La Campesina* // Colonia
+44650* // CP
+Guadalajara* // Municipio
+7 Manley Place* // Telefono???
+
+Medicamentos
+1375-8737*
+Trinitrato de glicerilo*
+7980-8243*
+Benzoilo*
+1278-8662*
+Paracetamol# 
