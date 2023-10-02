@@ -4,15 +4,10 @@
 #include <cstdlib>
 #include <sstream>
 
-#include "Paciente.h"
 #include "Nombre.h"
-#include "Fecha.h"
-#include "Domicilio.h"
 #include "Hora.h"
 #include "Medico.h"
-#include "Diagnostico.h"
-#include "Medicamento.h"
-#include "Consulta.h"
+
 
 using namespace std;
 
@@ -131,7 +126,6 @@ int ArchivoMedico::getIndex(const Lista<indexDuple<T>>& miLista, const T& e) con
             return miLista.indice(i).getIndex();
         }
     }
-    cin.ignore();
     return -1;
 }
 

@@ -19,7 +19,6 @@ class menuMedicos {
         void agregar();
         void eliminar();
         void buscar();
-        void mostrar();
         void importarArchivo();
 };
 

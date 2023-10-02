@@ -55,8 +55,7 @@ void menuMedicos::menu() {
         if (opc == "A" or opc == "a")      { agregar(); } 
         else if (opc == "B" or opc == "b") { eliminar(); } 
         else if (opc == "C" or opc == "c") { buscar(); }
-        else if (opc == "H" or opc == "h") { miArchivoMedico.compress(); }
-        else if (opc == "X" or opc == "x") {}
+        else if (opc == "X" or opc == "x") { return; }
         else { gotoxy(3, 16); std::cout <<GB; std::cout << "La opcion: \"" <<RB<< opc <<GB<< "\" no es una opcion valida..."<<RTNC; pausa(); }
 
     } while (opc != "X" and opc != "x");
@@ -286,8 +285,22 @@ void menuMedicos::eliminar() {
 }
 
 void menuMedicos::buscar() {
-    system(CLEAR);
-        /*const std::string subtiImport = "Buscar un Medico";
+    std::string opcBuscar;
+    gotoxy(3, 16);
+    std::cout << GB << "Buscar por Nombre.  [ " <<RF<< "A" <<GB " ]";
+    gotoxy(3, 17);
+    std::cout << GB << "Buscar por Codigo.  [ " <<RF<< "B" <<GB " ]";
+    gotoxy(3, 18);
+    std::cout << GB << "Regresar al menu.   [ " <<RF<< "X" <<GB " ]";
+    gotoxy(3, 19);
+    std::cout <<GB << "Tu opcion ==> ";
+    gotoxy(18, 19);
+    fflush(stdin);
+    std::cout <<RF; std::getline(std::cin, opcBuscar); setOpc(opcBuscar); std::cout <<RTNC;
+
+    if (opcBuscar == "A" or opcBuscar == "a") {
+        system(CLEAR);
+        const std::string subtiImport = "Buscar un Medico";
         std::cout<<ARB; setborder(ALTURA_BORDE, ANCHURA_BORDE); std::cout<<RTNC;
 
         gotoxy(((ANCHURA_BORDE - int(Titulo.length())) / 2), 3);
@@ -295,11 +308,133 @@ void menuMedicos::buscar() {
         gotoxy(((ANCHURA_BORDE - int(Subtitulo.length())) / 2), 4);
         std::cout << ARB << Subtitulo <<RTNC;
         gotoxy(((ANCHURA_BORDE - int(subtiImport.length())) / 2), 5);
-        std::cout << AB << subtiImport <<RTNC;*/
-}
+        std::cout << AB << subtiImport <<RTNC;
 
-void menuMedicos::mostrar() {
-    system(CLEAR);
+        std::string stringAux;
+        Nombre nombreAux;
+
+        gotoxy(3, 7);
+        std::cout <<GF<< "Ingresa el apellido del Medico a buscar: ";
+        gotoxy(45, 7);
+        fflush(stdin);
+        getline(std::cin, stringAux);
+        nombreAux.setApellido(stringAux);
+
+        gotoxy(3, 9);
+        std::cout <<GF<< "Ingresa el nombre del Medico a buscar: ";
+        gotoxy(43, 9);
+        fflush(stdin);
+        getline(std::cin, stringAux);
+        nombreAux.setNombre(stringAux);
+
+        int idx = miArchivoMedico.findData(nombreAux);
+        
+        if (idx != -1) {
+            Medico medicoAux = miArchivoMedico.getData(idx);
+
+            // Imprime el Nombre del Medico
+            gotoxy(3, 11);
+            cout << ARB << "Nombre del Medico: ";
+            gotoxy(23, 11);
+            cout << VF << medicoAux.getNombre().toString();
+
+            // Imprime el Codigo del Medico
+            gotoxy(3, 12);
+            cout << ARB << "Codigo del Medico: ";
+            gotoxy(23, 12);
+            cout << VF << medicoAux.getCodigo();
+
+            // Imprime la Cedula del Medico
+            gotoxy(3, 13);
+            cout << ARB << "Cedula del Medico: ";
+            gotoxy(23, 13);
+            cout << VF << medicoAux.getCedula();
+
+            // Imprime la Hora de Entrada del Medico
+            gotoxy(3, 14);
+            cout << ARB << "Hora de Entrada del Medico: ";
+            gotoxy(31, 14);
+            cout << VF << medicoAux.getHoraEntrada().toString();
+
+            // Imprime la Hora de Salida del Medico
+            gotoxy(3, 15);
+            cout << ARB << "Hora de Salida del Medico: ";
+            gotoxy(31, 15);
+            cout << VF << medicoAux.getHoraSalida().toString();
+
+            pausa();
+
+        } else {
+            gotoxy(3, 11);
+            std::cout <<RB<< "No se encontro un medico con ese nombre."<<RTNC; pausa();
+        }
+
+    } else if (opcBuscar == "B" or opcBuscar == "b") {
+        system(CLEAR);
+        const std::string subtiImport = "Buscar un Medico";
+        std::cout<<ARB; setborder(ALTURA_BORDE, ANCHURA_BORDE); std::cout<<RTNC;
+
+        gotoxy(((ANCHURA_BORDE - int(Titulo.length())) / 2), 3);
+        std::cout << VB << Titulo <<RTNC;
+        gotoxy(((ANCHURA_BORDE - int(Subtitulo.length())) / 2), 4);
+        std::cout << ARB << Subtitulo <<RTNC;
+        gotoxy(((ANCHURA_BORDE - int(subtiImport.length())) / 2), 5);
+        std::cout << AB << subtiImport <<RTNC;
+
+        std::string stringAux;
+
+        gotoxy(3, 7);
+        std::cout <<GF<< "Ingresa el codigo del Medico a buscar: ";
+        gotoxy(45, 7);
+        fflush(stdin);
+        getline(std::cin, stringAux);
+
+        int idx = miArchivoMedico.findData(stringAux);
+        
+        if (idx != -1) {
+            Medico medicoAux = miArchivoMedico.getData(idx);
+
+            // Imprime el Nombre del Medico
+            gotoxy(3, 9);
+            cout << ARB << "Nombre del Medico: ";
+            gotoxy(23, 9);
+            cout << VF << medicoAux.getNombre().toString();
+
+            // Imprime el Codigo del Medico
+            gotoxy(3, 10);
+            cout << ARB << "Codigo del Medico: ";
+            gotoxy(23, 10);
+            cout << VF << medicoAux.getCodigo();
+
+            // Imprime la Cedula del Medico
+            gotoxy(3, 11);
+            cout << ARB << "Cedula del Medico: ";
+            gotoxy(23, 11);
+            cout << VF << medicoAux.getCedula();
+
+            // Imprime la Hora de Entrada del Medico
+            gotoxy(3, 12);
+            cout << ARB << "Hora de Entrada del Medico: ";
+            gotoxy(31, 12);
+            cout << VF << medicoAux.getHoraEntrada().toString();
+
+            // Imprime la Hora de Salida del Medico
+            gotoxy(3, 13);
+            cout << ARB << "Hora de Salida del Medico: ";
+            gotoxy(31, 13);
+            cout << VF << medicoAux.getHoraSalida().toString();
+
+            pausa();
+
+        } else {
+            gotoxy(3, 9);
+            std::cout <<RB<< "No se encontro un medico con ese codigo."<<RTNC; pausa();
+        }
+    } else if (opcBuscar == "X" or opcBuscar == "x") {
+        return;
+    } else {
+        gotoxy(3, 21); std::cout <<GB; std::cout << "La opcion: \"" <<RB<< opcBuscar <<GB<< "\" no es una opcion valida..."<<RTNC; pausa();
+    }
 }
 
 void menuMedicos::importarArchivo() {

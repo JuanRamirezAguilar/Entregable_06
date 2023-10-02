@@ -33,7 +33,6 @@ void MenuPrincipal::menu() {
     std::string opciones;
     AltEnter();
     do {
-        SetConsoleOutputCP(CP_UTF8);
         system(CLEAR);
         std::cout<<ARB; setborder(ALTURA_BORDE, ANCHURA_BORDE); std::cout<<RTNC;
 
